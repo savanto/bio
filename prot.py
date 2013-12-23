@@ -53,5 +53,5 @@ if __name__ == "__main__":
         s = f.read().strip()
     except IOError:
       s = filename
-  print(''.join(prot(s)))
+    print(''.join(prot(s)))
 
