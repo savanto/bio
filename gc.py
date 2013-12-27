@@ -44,20 +44,14 @@ def gc(dna_strings):
 
 if __name__ == "__main__":  
   import sys
+  from fasta import fasta_dict
   if len(sys.argv) < 2:
     print(__doc__)
     sys.exit(1)
 
   for filename in sys.argv[1:]:
     try:
-      with open(filename) as f:
-        dna_strings = {}
-        for line in f:
-          if line[0] == '>':
-            ID = line[1:].strip()
-            dna_strings[ID] = ""
-          else:
-            dna_strings[ID] += line.strip()
+      dna_strings = fasta_dict(filename)
     except IOError:
       print("Skipping file", filename, ": unable to open/read file.")
       continue

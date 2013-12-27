@@ -35,25 +35,14 @@ def sseq(s, t):
 
 if __name__ == "__main__":  
   import sys
+  from fasta import fasta_list
   if len(sys.argv) < 2:
     print(__doc__)
     sys.exit(1)
 
   elif len(sys.argv) < 3:
     try:
-      with open(sys.argv[1]) as fasta:
-        ID_s = fasta.readline().strip()
-        line = fasta.readline().strip()
-        s = ""
-        while line[0] != '>':
-          s += line
-          line = fasta.readline().strip()
-        ID_t = line
-        line = fasta.readline().strip()
-        t = ""
-        while len(line) != 0:
-          t += line
-          line = fasta.readline().strip()
+      s, t = fasta_list(sys.argv[1])
     except IOError:
       print("Unable to open/read FASTA file", sys.argv[1])
       sys.exit(1)

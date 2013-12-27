@@ -68,21 +68,15 @@ def orf(s):
 
 if __name__ == "__main__":  
   import sys
+  from fasta import fasta_string
   if len(sys.argv) < 2:
     print(__doc__)
     sys.exit(1)
 
   try:
-    with open(sys.argv[1]) as f:
-      s = f.readline().strip()
-      if s[0] == '>':
-        info = s
-        s = ""
-      for line in f.read():
-        s += line.strip()
+    s = fasta_string(sys.argv[1])
   except IOError:
     s = sys.argv[1]
-
   proteins = orf(s)
   for protein in proteins:
     print(protein)

@@ -59,22 +59,13 @@ def splc(dna_strings):
 
 if __name__ == "__main__":  
   import sys
+  from fasta import fasta_list
   if len(sys.argv) < 2:
     print(__doc__)
     sys.exit(1)
 
   try:
-    with open(sys.argv[1]) as fasta:
-      fasta.readline().strip()
-      dna_strings = []
-      s = ""
-      for line in fasta.readlines():
-        if line[0] == '>':
-          dna_strings.append(s)
-          s = ""
-        else:
-          s += line.strip()
-      dna_strings.append(s)
+    dna_strings = fasta_list(sys.argv[1])
   except IOError:
     print("Unable to open/read file", sys.argv[1])
     sys.exit(1)
